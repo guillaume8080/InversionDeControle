@@ -1,0 +1,4 @@
+isGettingOutOfPenaltyBox must be false: true
+nombre Players: 3
+isGettingOutOfPenaltyBox must be true: true
+est jouable: true

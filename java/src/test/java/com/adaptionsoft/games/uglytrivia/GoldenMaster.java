@@ -2,9 +2,11 @@ package com.adaptionsoft.games.uglytrivia;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,6 +19,8 @@ public class GoldenMaster {
     @Test
     public  void runTest1(){
         Game aGame = new Game();
+
+
 
         assertEquals(1,1);
 
@@ -52,7 +56,51 @@ public class GoldenMaster {
 
         } while (notAWinner);
 
+        EcrireResultatTest(Records);
 
+    }
+
+    private void EcrireResultatTest(Map Records) {
+        BufferedWriter bf = null;
+        final String FILE_NAME = "/home/guillaume/Bureau/Dev/DevLogiciel/tpGolden/trivia/java/src/test/java/com/adaptionsoft/games/uglytrivia/resultatGoldenMatserTrue.txt";
+        File targetFile = new File(FILE_NAME);
+
+        try {
+
+            // create new BufferedWriter for the output file
+            bf = new BufferedWriter(new FileWriter(targetFile));
+
+            // iterate map entries
+
+            Set collection = Records.entrySet();
+            Set lesKeys = Records.keySet();
+            Collection lesvalues = Records.values();
+
+            List<String> ListOfKeys = new ArrayList<String>(lesKeys);
+            List<String> ListOfValues = new ArrayList<String>(lesvalues);
+
+            for(int i = 0 ; i < collection.size(); i++){
+                bf.write(ListOfKeys.get(i) + ": "  + ListOfValues.get(i));
+
+                bf.newLine();
+            }
+
+
+
+            bf.flush();
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        } finally {
+
+            try {
+
+                // always close the writer
+                bf.close();
+            }
+            catch (Exception e) {
+            }
+        }
 
     }
 
