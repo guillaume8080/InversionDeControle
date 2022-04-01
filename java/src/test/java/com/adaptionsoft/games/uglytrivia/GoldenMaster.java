@@ -20,6 +20,8 @@ public class GoldenMaster {
 
         assertEquals(1,1);
 
+        int randomRoll;
+
         aGame.add("Chet");
         aGame.add("Pat");
         aGame.add("Sue");
@@ -29,14 +31,16 @@ public class GoldenMaster {
 
         Random rand = new Random();
 
-
-
-
-
-
         do {
 
-            aGame.roll(rand.nextInt(5) + 1);
+              aGame.roll(randomRoll = rand.nextInt(5) + 1);
+            if (randomRoll % 2 != 0){
+                Records.put("isGettingOutOfPenaltyBox must be true" , new Boolean(aGame.isGettingOutOfPenaltyBox).toString());
+            }
+            if (randomRoll % 2 == 0){
+                Records.put("isGettingOutOfPenaltyBox must be false" , new Boolean(aGame.isGettingOutOfPenaltyBox).toString());
+            }
+
 
             if (rand.nextInt(9) == 7) {
                 notAWinner = aGame.wrongAnswer();
@@ -47,6 +51,8 @@ public class GoldenMaster {
 
 
         } while (notAWinner);
+
+
 
     }
 
